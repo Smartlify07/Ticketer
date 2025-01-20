@@ -35,13 +35,13 @@ const RegisterPage = () => {
 
   return (
     <div className="flex gap-4 w-screen h-screen font-poppins">
-      <div className="rounded-br-xl relative rounded-tr-xl h-screen  md:w-5/12">
+      <div className="rounded-br-xl relative hidden md:block rounded-tr-xl h-screen  md:w-5/12">
         <div className="absolute h-full z-20 bg-black bg-opacity-45 w-full"></div>
         <img src={cover} alt="" className="w-full h-full object-cover " />
       </div>
 
-      <div className="flex flex-col justify-center items-center md:w-7/12">
-        <div className="w-7/12 flex flex-col gap-10">
+      <div className="flex flex-col justify-center items-center w-full md:w-7/12">
+        <div className="md:w-7/12 flex flex-col gap-10">
           <h1 className="text-black text-4xl font-medium flex items-center gap-4">
             Get your ticket <IoTicketOutline size={32} />
           </h1>
