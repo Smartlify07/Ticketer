@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { useAuthContext } from '../../context/AuthContext';
 const SignIn = () => {
   const inputClassName =
-    'border rounded-md py-2 text-base relative w-full placeholder:text-sm px-4 focus:outline-none focus:shadow-sm focus:border-1.5 focus:border-blue-900';
+    'border rounded-md py-2 text-sm relative w-full placeholder:text-sm px-4 focus:outline-none focus:shadow-sm focus:border-1.5 focus:border-blue-900';
 
   const { handleSignIn } = useAuthContext();
 
