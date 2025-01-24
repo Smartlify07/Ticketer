@@ -4,26 +4,26 @@ import {
   Route,
   RouterProvider,
 } from 'react-router';
-
-import GlobalContextProvider from './context/GlobalContext';
-import Home from './pages/Home';
-import RegisterPage from './pages/Register';
-import TicketPage from './pages/TicketPage';
+import AuthLayout from './layout/(auth)/AuthLayout';
+import SignUp from './pages/(auth)/SignUp';
+import SignIn from './pages/(auth)/SignIn';
+import AuthProvider from './context/AuthContext';
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/ticket" element={<TicketPage />} />
+        <Route element={<AuthLayout />}>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Route>
       </>
     )
   );
   return (
-    <GlobalContextProvider>
+    <AuthProvider>
       <RouterProvider router={router}></RouterProvider>
-    </GlobalContextProvider>
+    </AuthProvider>
   );
 }
 
