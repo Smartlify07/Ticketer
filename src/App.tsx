@@ -8,6 +8,7 @@ import AuthLayout from './layout/(auth)/AuthLayout';
 import SignUp from './pages/(auth)/SignUp';
 import SignIn from './pages/(auth)/SignIn';
 import AuthProvider from './context/AuthContext';
+import { Slide, ToastContainer } from 'react-toastify';
 
 function App() {
   const router = createBrowserRouter(
@@ -22,6 +23,11 @@ function App() {
   );
   return (
     <AuthProvider>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        transition={Slide}
+      />
       <RouterProvider router={router}></RouterProvider>
     </AuthProvider>
   );

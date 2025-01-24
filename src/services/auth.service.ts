@@ -1,5 +1,6 @@
 import { ID } from 'appwrite';
 import { account } from '../appwrite';
+import { toast } from 'react-toastify';
 
 export const useAuthService = () => {
   const signUp = async (
@@ -19,7 +20,18 @@ export const useAuthService = () => {
 
       return user;
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+        console.error(error.message);
+        toast.error(error.message, {
+          hideProgressBar: true,
+          style: {
+            width: '300px',
+          },
+        });
+      } else {
+        console.error(error);
+        toast.error(String(error), { hideProgressBar: true });
+      }
     }
   };
 
@@ -27,7 +39,18 @@ export const useAuthService = () => {
     try {
       return await account.createEmailPasswordSession(email, password);
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+        console.error(error.message);
+        toast.error(error.message, {
+          hideProgressBar: true,
+          style: {
+            width: '300px',
+          },
+        });
+      } else {
+        console.error(error);
+        toast.error(String(error), { hideProgressBar: true });
+      }
       return null;
     }
   };
