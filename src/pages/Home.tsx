@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router';
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <main className="flex flex-col gap-10 px-10  py-10 ">
+    <main className="flex flex-col gap-10 md:py-10 ">
       <section className="flex flex-col items-center gap-10 justify-center w-full px-5 md:px-0 h-hero-sm  md:h-hero relative">
         <header className="flex flex-col items-center gap-4">
           <h1 className="text-4xl md:text-6xl  text-center font-medium md:w-10/12">
             Find Events Happening at Glorious Vision University
           </h1>
-          <p className="text-neutral-600 text-base md:text-xl">
+          <p className="text-neutral-600 text-center text-lg md:text-xl">
             Find events, get tickets <TiTicket className="inline" /> seamlessly.
           </p>
         </header>
