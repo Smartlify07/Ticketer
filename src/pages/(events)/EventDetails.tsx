@@ -11,7 +11,7 @@ const EventDetails = () => {
   const event = schoolEvents.find((event) => event.id === id);
 
   return (
-    <main className="text-black px-10 border flex flex-col font-poppins gap-0 py-12 md:flex-row  md:gap-10">
+    <main className="text-black px-10  flex flex-col font-poppins gap-0 py-12 md:flex-row  md:gap-10">
       <section className="flex flex-col relative md:w-7/12">
         <img
           src={event?.coverImage}
