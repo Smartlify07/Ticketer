@@ -7,13 +7,9 @@ import { getDateMonthTime } from '../../utils/getDate';
 const EventDetails = () => {
   const title = useParams().title;
   const id = title?.split('-')[0];
-  const event = schoolEvents.find((event) => {
-    if (event.id === id) {
-      return event;
-    } else {
-      throw Error('Event not found');
-    }
-  });
+
+  const event = schoolEvents.find((event) => event.id === id);
+
   return (
     <main className="text-black px-10 border flex flex-col font-poppins gap-0 py-12 md:flex-row  md:gap-10">
       <section className="flex flex-col relative md:w-7/12">
