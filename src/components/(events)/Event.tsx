@@ -3,8 +3,10 @@ import { EventType } from '../../types/types';
 import { getDateMonthTime } from '../../utils/getDate';
 import { BiCalendar } from 'react-icons/bi';
 import { BsClock } from 'react-icons/bs';
+import { Link, useLocation } from 'react-router';
 
-const Event = ({ title, coverImage, startDate }: EventType) => {
+const Event = ({ title, coverImage, startDate, id }: EventType) => {
+  const pathname = useLocation().pathname;
   return (
     <div className="flex flex-col w-full gap-4 border rounded-xl px-4 py-4">
       <img
@@ -27,9 +29,14 @@ const Event = ({ title, coverImage, startDate }: EventType) => {
             <BsClock /> {getDateMonthTime(startDate).time}
           </h3>
         </div>
-        <button className="rounded-md text-blue-900 mt-5 text-sm  font-medium">
+        <Link
+          to={
+            pathname.replace(/\/$/, '') + `/${id}-${title.replace(/\s+/g, '-')}`
+          }
+          className="rounded-md text-blue-900 text-center mt-5 text-sm  font-medium"
+        >
           View Details <FaAngleRight size={20} className="inline" />
-        </button>
+        </Link>
       </div>
     </div>
   );

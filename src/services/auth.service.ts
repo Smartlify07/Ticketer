@@ -18,6 +18,10 @@ export const useAuthService = () => {
         matricNumber,
       });
 
+      if (user) {
+        window.location.replace('/');
+      }
+
       return user;
     } catch (error) {
       if (error instanceof Error) {
@@ -37,7 +41,11 @@ export const useAuthService = () => {
 
   const login = async (email: string, password: string) => {
     try {
-      return await account.createEmailPasswordSession(email, password);
+      const session = await account.createEmailPasswordSession(email, password);
+      if (session) {
+        window.location.replace('/');
+      }
+      return session;
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
