@@ -9,6 +9,9 @@ import SignUp from './pages/(auth)/SignUp';
 import SignIn from './pages/(auth)/SignIn';
 import AuthProvider from './context/AuthContext';
 import { Slide, ToastContainer } from 'react-toastify';
+import RootLayout from './layout/RootLayout';
+import Home from './pages/Home';
+import Explore from './pages/Explore';
 
 function App() {
   const router = createBrowserRouter(
@@ -17,6 +20,11 @@ function App() {
         <Route element={<AuthLayout />}>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+        </Route>
+
+        <Route element={<RootLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/explore" element={<Explore />} />
         </Route>
       </>
     )
