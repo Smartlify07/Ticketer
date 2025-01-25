@@ -12,6 +12,7 @@ import { Slide, ToastContainer } from 'react-toastify';
 import RootLayout from './layout/RootLayout';
 import Home from './pages/Home';
 import Explore from './pages/Explore';
+import EventDetails from './pages/(events)/EventDetails';
 
 function App() {
   const router = createBrowserRouter(
@@ -25,6 +26,7 @@ function App() {
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/explore/:title" element={<EventDetails />} />
         </Route>
       </>
     )
