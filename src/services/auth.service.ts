@@ -45,6 +45,7 @@ export const useAuthService = () => {
       if (session) {
         window.location.replace('/');
       }
+      return session;
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
