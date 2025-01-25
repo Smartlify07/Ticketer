@@ -13,3 +13,18 @@ export type SignInFormValues = {
 };
 
 export type UserType = Models.User<Models.Preferences> | Models.Session | null;
+export type AttendeeType = {
+  id: string;
+  name: string;
+};
+export type EventType = {
+  id: string;
+  attendees: AttendeeType[];
+  title: string;
+  description: string;
+  coverImage: string;
+  type: string;
+  location: string;
+  startDate: string;
+  endDate?: string;
+};
