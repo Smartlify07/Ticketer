@@ -15,6 +15,7 @@ export const schoolEvents: EventType[] = [
       'Students showcase innovative science projects and experiments to the school community.',
     type: 'Exhibition',
     startDate: '2025-02-15T09:00:00',
+    ticketPrice: 1200, // Adjusted to be in the range 1000 to 3000
   },
   {
     id: '2',
@@ -30,6 +31,7 @@ export const schoolEvents: EventType[] = [
       "A gathering for students to discuss this month's book and share their thoughts.",
     type: 'Club Activity',
     startDate: '2025-02-20T16:00:00',
+    ticketPrice: 1500, // Adjusted to be in the range 1000 to 3000
   },
   {
     id: '3',
@@ -46,6 +48,7 @@ export const schoolEvents: EventType[] = [
       'A full day of athletic events, competitions, and fun for students and staff.',
     type: 'Sports',
     startDate: '2025-03-01T08:00:00',
+    ticketPrice: 2200, // Adjusted to be in the range 1000 to 3000
   },
   {
     id: '4',
@@ -61,6 +64,7 @@ export const schoolEvents: EventType[] = [
       'An interactive session to help students improve their math skills with fun activities.',
     type: 'Workshop',
     startDate: '2025-03-10T10:00:00',
+    ticketPrice: 1800, // Adjusted to be in the range 1000 to 3000
   },
   {
     id: '5',
@@ -76,6 +80,7 @@ export const schoolEvents: EventType[] = [
       'The Drama Club presents their latest play, showcasing student talent and creativity.',
     type: 'Performance',
     startDate: '2025-03-15T18:00:00',
+    ticketPrice: 2000, // Adjusted to be in the range 1000 to 3000
   },
   {
     id: '6',
@@ -91,5 +96,6 @@ export const schoolEvents: EventType[] = [
       'Students team up to solve coding challenges and build innovative software projects.',
     type: 'Competition',
     startDate: '2025-03-20T09:00:00',
+    ticketPrice: 2500, // Adjusted to be in the range 1000 to 3000
   },
 ];
