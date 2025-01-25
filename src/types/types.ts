@@ -27,4 +27,5 @@ export type EventType = {
   location: string;
   startDate: string;
   endDate?: string;
+  ticketPrice: number;
 };
