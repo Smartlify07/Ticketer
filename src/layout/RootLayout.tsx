@@ -1,10 +1,11 @@
 import { Outlet, useNavigate } from 'react-router';
 import { useAuthContext } from '../context/AuthContext';
-import { BiUser } from 'react-icons/bi';
 
 const RootLayout = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
+
+  const name = user && 'name' in user! ? user.name : '';
   return (
     <main className="flex flex-col px-6 items-center font-poppins min-h-screen bg-blue-50 bg-opacity-5 md:px-10">
       <div className="flex flex-col max-w-[1440px]">
@@ -34,8 +35,8 @@ const RootLayout = () => {
 
           {user && (
             <div className="flex items-center gap-4">
-              <button className="rounded-full w-10 h-10 flex items-center justify-center bg-blue-900 text-white">
-                <BiUser size={24} />
+              <button className="rounded-full w-10 text-lg font-medium h-10 flex items-center justify-center bg-blue-900 text-white">
+                {name.charAt(0)}
               </button>
             </div>
           )}

@@ -1,7 +1,7 @@
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { schoolEvents } from '../../dummyData';
 import { CiLocationOn } from 'react-icons/ci';
-import { BsClock } from 'react-icons/bs';
+import { BsArrowLeft, BsClock } from 'react-icons/bs';
 import { getDateMonthTime } from '../../utils/getDate';
 import { IoTicketOutline } from 'react-icons/io5';
 import { BiCalendar } from 'react-icons/bi';
@@ -11,9 +11,18 @@ const EventDetails = () => {
   const id = title?.split('-')[0];
 
   const event = schoolEvents.find((event) => event.id === id);
-
+  const navigate = useNavigate();
+  const handleGoback = () => {
+    navigate(-1);
+  };
   return (
     <main className="text-black py-6 flex flex-col items-center font-poppins gap-0 md:py-12">
+      <button
+        onClick={handleGoback}
+        className="text-neutral-800 mb-6 flex items-center gap-3 self-start text-sm"
+      >
+        <BsArrowLeft size={20} /> Back
+      </button>
       <div className="flex flex-col md:flex-row md:gap-10 xl:max-w-[1440px]">
         <section className="flex flex-col relative md:w-7/12">
           <img

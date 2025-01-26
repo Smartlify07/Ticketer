@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { SignInFormValues, SignUpFormValues, UserType } from '../types/types';
 import { useAuthService } from '../services/auth.service';
-import { Models } from 'appwrite';
 
 type AuthContextType = {
   user: UserType;
@@ -33,7 +32,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     (async () => {
       const user = await getUser();
-      setUser(user as Models.User<Models.Preferences>);
+      setUser(user);
       setLoading(false);
     })();
   }, []);
