@@ -3,11 +3,12 @@ import { BiEnvelope } from 'react-icons/bi';
 import { GiPadlock } from 'react-icons/gi';
 import * as Yup from 'yup';
 import { useAuthContext } from '../../context/AuthContext';
+import { FcGoogle } from 'react-icons/fc';
 const SignIn = () => {
   const inputClassName =
     'border rounded-md py-2 text-sm relative w-full placeholder:text-sm px-4 focus:outline-none focus:shadow-sm focus:border-1.5 focus:border-blue-900';
 
-  const { handleSignIn } = useAuthContext();
+  const { handleSignIn, handleSignUpWithGoogle } = useAuthContext();
 
   const validationSchema = Yup.object({
     email: Yup.string().email().required('Your email address is required'),
@@ -27,6 +28,20 @@ const SignIn = () => {
           Enter your details below to log in
         </p>
       </header>
+
+      <button
+        onClick={handleSignUpWithGoogle}
+        className="border text-sm font-medium rounded-md py-2 w-full px-4 flex items-center justify-center gap-4"
+      >
+        <FcGoogle />
+        Sign in with Google
+      </button>
+
+      <div className="flex items-center gap-2">
+        <hr className="border w-full" />
+        <p className="text-neutral-400">OR</p>
+        <hr className="border w-full" />
+      </div>
       <Formik
         initialValues={{
           email: '',

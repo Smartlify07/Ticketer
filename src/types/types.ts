@@ -1,4 +1,5 @@
-import { Models } from 'appwrite';
+import { User } from '@supabase/supabase-js';
+import { FlutterWaveResponse } from 'flutterwave-react-v3/dist/types';
 
 export type SignUpFormValues = {
   name: string;
@@ -12,20 +13,32 @@ export type SignInFormValues = {
   password: string;
 };
 
-export type UserType = Models.User<Models.Preferences> | Models.Session | null;
+export type UserType = User | null;
+
 export type AttendeeType = {
   id: string;
   name: string;
 };
+
 export type EventType = {
   id: string;
-  attendees: AttendeeType[];
-  title: string;
   description: string;
-  coverImage: string;
-  type: string;
+  event_date: string;
+  ticketFee: number;
+  title: string;
+  open_to_all: boolean;
+  cover_image?: string;
   location: string;
-  startDate: string;
-  endDate?: string;
-  ticketPrice: number;
 };
+
+export type Profile = {
+  user_id: string;
+  name: string;
+  matricNumber: string;
+  profile_completed: boolean;
+  department: string;
+  id: string;
+  email: string;
+};
+
+export type Payment = FlutterWaveResponse & {};

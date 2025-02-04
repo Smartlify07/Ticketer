@@ -7,8 +7,8 @@ const RootLayout = () => {
   const navigate = useNavigate();
   return (
     <main className="flex flex-col px-6 items-center font-poppins min-h-screen bg-blue-50 bg-opacity-5 md:px-10">
-      <div className="flex flex-col max-w-[1440px]">
-        <nav className="rounded-2xl   flex items-center justify-between py-6">
+      <div className="flex flex-col w-full max-w-[1440px]">
+        <nav className="rounded-2xl flex items-center justify-between py-6">
           <h1 className="text-blue-900 text-2xl font-medium">Eventify</h1>
 
           {!user && (
