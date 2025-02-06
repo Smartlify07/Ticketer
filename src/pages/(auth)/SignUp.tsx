@@ -4,18 +4,16 @@ import { FaRegUser } from 'react-icons/fa';
 import { GiPadlock } from 'react-icons/gi';
 import * as Yup from 'yup';
 import { useAuthContext } from '../../context/AuthContext';
+import { FcGoogle } from 'react-icons/fc';
 const SignUp = () => {
   const inputClassName =
     'border rounded-md py-2 text-sm relative w-full placeholder:text-sm px-4 focus:outline-none focus:shadow-sm focus:border-1.5 focus:border-blue-900';
 
-  const { handleSignUp } = useAuthContext();
+  const { handleSignUp, handleSignUpWithGoogle } = useAuthContext();
 
   const validationSchema = Yup.object({
     name: Yup.string().required('Your name is required'),
-    matricNumber: Yup.string()
-      .required('Your matric number is required')
-      .min(17, 'Your matric number cannot be less than 17')
-      .max(17, 'Your matric number cannot be more than 17 characters'),
+
     email: Yup.string().email().required('Your email address is required'),
     password: Yup.string()
       .required('Please Enter your password')
@@ -33,6 +31,20 @@ const SignUp = () => {
           Enter your details below to get started
         </p>
       </header>
+
+      <button
+        onClick={handleSignUpWithGoogle}
+        className="border text-sm font-medium rounded-md py-2 w-full px-4 flex items-center justify-center gap-4"
+      >
+        <FcGoogle />
+        Sign in with Google
+      </button>
+
+      <div className="flex items-center gap-2">
+        <hr className="border w-full" />
+        <p className="text-neutral-400 text-xs">OR</p>
+        <hr className="border w-full" />
+      </div>
       <Formik
         initialValues={{
           name: '',
@@ -107,24 +119,6 @@ const SignUp = () => {
               />
               <ErrorMessage
                 name="password"
-                className="text-xs font-medium text-red-600"
-                component="span"
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label htmlFor="name" className="text-black text-sm font-normal">
-              Matric Number
-            </label>
-            <div className="relative w-full">
-              <Field
-                name="matricNumber"
-                placeholder="e.g L/CBA/CSC/23/0000"
-                className={inputClassName}
-              />
-              <ErrorMessage
-                name="matricNumber"
                 className="text-xs font-medium text-red-600"
                 component="span"
               />
