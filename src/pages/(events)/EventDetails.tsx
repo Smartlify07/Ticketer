@@ -10,6 +10,7 @@ import { EventType } from '../../types/types';
 import EventDetailsSkeleton from '../../components/(skeletons)/EventDetailsSkeleton';
 import OptimizedImage from '../../components/OptimizedImage';
 import { CiLocationOn } from 'react-icons/ci';
+import { TbCurrencyNaira } from 'react-icons/tb';
 
 const EventDetails = () => {
   const id = useParams().id;
@@ -54,7 +55,7 @@ const EventDetails = () => {
               </h1>
             </div>
 
-            <div className="flex items-center gap-x-6 gap-y-2 flex-wrap md:flex-nowrap">
+            <div className="flex items-center gap-x-6  gap-y-2 flex-wrap md:flex-wrap">
               <h3 className="text-neutral-600 flex items-center gap-2 text-sm">
                 <CiLocationOn size={24} /> {event?.location}
               </h3>
@@ -84,7 +85,8 @@ const EventDetails = () => {
             <p className="text-neutral-900 text-lg font-medium">
               Price:{' '}
               <span className="text-neutral-500">
-                ₦{event?.ticketFee.toLocaleString()}
+                <TbCurrencyNaira className="inline" />
+                {event?.ticketFee.toLocaleString()}
               </span>
             </p>
 

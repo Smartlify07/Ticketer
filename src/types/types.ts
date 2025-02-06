@@ -41,4 +41,15 @@ export type Profile = {
   email: string;
 };
 
-export type Payment = FlutterWaveResponse & {};
+export type Payment = FlutterWaveResponse & {
+  user_id: string;
+  event_id: string;
+};
+export type Ticket = {
+  id: string;
+  created_at: string;
+  user_id: string;
+  event_id: string;
+  tx_ref: string;
+  events: EventType;
+};

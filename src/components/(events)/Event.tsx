@@ -9,7 +9,7 @@ import OptimizedImage from '../OptimizedImage';
 const Event = ({ title, cover_image, event_date, id }: EventType) => {
   const pathname = useLocation().pathname;
   return (
-    <div className="flex flex-col w-full gap-4 border rounded-xl px-4 py-4">
+    <div className="flex flex-col w-full gap-4 border hover:shadow-sm transition-all rounded-xl px-4 py-4">
       {cover_image ? (
         <OptimizedImage
           alt={title}

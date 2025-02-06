@@ -19,6 +19,8 @@ import Profile from './pages/(profile)/Profile';
 import ProfileProvider from './context/ProfileContext';
 import ProtectedRoute from './Routes/ProtectedRoute';
 import EventsProvider from './context/EventsContext';
+import TicketsPage from './pages/(tickets)/TicketsPage';
+import TicketsProvider from './context/TicketContext';
 
 function App() {
   const router = createBrowserRouter(
@@ -57,6 +59,17 @@ function App() {
                     <Checkout />
                   </CheckoutProvider>
                 </EventsProvider>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/mytickets"
+            element={
+              <ProtectedRoute>
+                <TicketsProvider>
+                  <TicketsPage />
+                </TicketsProvider>
               </ProtectedRoute>
             }
           />

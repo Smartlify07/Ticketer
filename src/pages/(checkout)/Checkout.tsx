@@ -36,7 +36,11 @@ const Checkout = () => {
               onClick={() => {
                 handleInitiatePayment({
                   callback: (response) => {
-                    handleUpdatePayment(response);
+                    handleUpdatePayment({
+                      ...response,
+                      user_id: profile?.id ?? '',
+                      event_id: event?.id ?? '',
+                    });
                     closePaymentModal();
                   },
                   onClose: () => {},
