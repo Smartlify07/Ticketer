@@ -1,9 +1,10 @@
 import { Outlet, useNavigate } from 'react-router';
 import { useAuthContext } from '../context/AuthContext';
 import { FaUser } from 'react-icons/fa';
+import { LuLogOut } from 'react-icons/lu';
 
 const RootLayout = () => {
-  const { user } = useAuthContext();
+  const { user, logout } = useAuthContext();
   const navigate = useNavigate();
 
   return (
@@ -37,6 +38,13 @@ const RootLayout = () => {
             <div className="flex items-center gap-4">
               <button className="rounded-full w-10 text-lg font-medium h-10 flex items-center justify-center bg-blue-900 text-white">
                 <FaUser />
+              </button>
+
+              <button
+                onClick={logout}
+                className="rounded-full w-10 text-lg font-medium h-10 flex items-center justify-center bg-blue-900 text-white"
+              >
+                <LuLogOut />
               </button>
             </div>
           )}

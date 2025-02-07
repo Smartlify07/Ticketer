@@ -9,6 +9,7 @@ type AuthContextType = {
   handleSignUp: (values: SignUpFormValues) => void;
   handleSignIn: (values: SignInFormValues) => void;
   handleSignUpWithGoogle: () => void;
+  logout: () => void;
 };
 export const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -61,6 +62,15 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Sign out failed:', error.message);
+      return;
+    }
+    setUser(null);
+  };
+
   useEffect(() => {
     (async () => {
       const {
@@ -102,6 +112,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         handleSignUp,
         handleSignIn,
         handleSignUpWithGoogle,
+        logout,
       }}
     >
       {children}
