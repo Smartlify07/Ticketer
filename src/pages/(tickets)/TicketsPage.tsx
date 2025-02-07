@@ -5,7 +5,6 @@ import Ticket from '../../components/(tickets)/Ticket';
 const TicketsPage = () => {
   const { tickets, loading } = useTickets();
   const navigate = useNavigate();
-  console.log(tickets);
   return (
     <main className="flex  justify-center">
       <div className="w-full items-center justify-center max-w-[1440px] flex flex-col">

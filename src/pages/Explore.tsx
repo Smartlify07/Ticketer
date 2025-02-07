@@ -29,7 +29,15 @@ const Explore = () => {
         </div>
       )}
 
-      {!loading && events.length === 0 && (
+      {!loading && events && events.length === 0 && (
+        <section className="flex flex-col gap-4">
+          <h1 className="text-3xl md:text-4xl font-medium font-montserrat">
+            No events found
+          </h1>
+        </section>
+      )}
+
+      {!loading && !events && (
         <section className="flex flex-col gap-4">
           <h1 className="text-3xl md:text-4xl font-medium font-montserrat">
             No events found
