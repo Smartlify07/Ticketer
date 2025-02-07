@@ -1,15 +1,15 @@
 import { Outlet, useNavigate } from 'react-router';
 import { useAuthContext } from '../context/AuthContext';
+import { FaUser } from 'react-icons/fa';
 
 const RootLayout = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
 
-  const name = user && 'name' in user! ? user.name : '';
   return (
     <main className="flex flex-col px-6 items-center font-poppins min-h-screen bg-blue-50 bg-opacity-5 md:px-10">
-      <div className="flex flex-col max-w-[1440px]">
-        <nav className="rounded-2xl   flex items-center justify-between py-6">
+      <div className="flex flex-col w-full max-w-[1440px]">
+        <nav className="rounded-2xl flex items-center justify-between py-6">
           <h1 className="text-blue-900 text-2xl font-medium">Eventify</h1>
 
           {!user && (
@@ -36,7 +36,7 @@ const RootLayout = () => {
           {user && (
             <div className="flex items-center gap-4">
               <button className="rounded-full w-10 text-lg font-medium h-10 flex items-center justify-center bg-blue-900 text-white">
-                {name.charAt(0)}
+                <FaUser />
               </button>
             </div>
           )}
