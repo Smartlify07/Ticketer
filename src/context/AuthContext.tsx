@@ -50,6 +50,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const handleSignUpWithGoogle = async () => {
     const { error: authError } = await supabase.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        redirectTo: import.meta.env.VITE_APP_URL,
+      },
     });
 
     if (authError) {
