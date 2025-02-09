@@ -1,12 +1,19 @@
 import { useNavigate } from 'react-router';
 import useTickets from '../../hooks/useTickets';
 import Ticket from '../../components/(tickets)/Ticket';
+import TicketsPageSkeleton from '../../components/(skeletons)/TicketsPageSkeleton';
 
 const TicketsPage = () => {
   const { tickets, loading } = useTickets();
   const navigate = useNavigate();
   return (
-    <main className="flex  justify-center">
+    <main className="flex flex-col  justify-center py-10">
+      <header className="flex flex-col gap-2">
+        <h1 className="text-2xl font-medium text-neutral-800">My Tickets</h1>
+        <p className="text-neutral-500 text-sm">
+          View your tickets and upcoming events
+        </p>
+      </header>
       <div className="w-full items-center justify-center max-w-[1440px] flex flex-col">
         {!loading && tickets.length === 0 && (
           <div className="flex flex-col justify-center min-h-[500px] gap-6">
@@ -29,23 +36,11 @@ const TicketsPage = () => {
             </div>
           </div>
         )}
-        {loading && (
-          <div className="flex justify-center border items-center">
-            Loading...
-          </div>
-        )}
+        {loading && <TicketsPageSkeleton />}
 
         {tickets.length > 0 && (
           <section className="flex flex-col self-start w-full py-10 gap-8">
-            <header className="flex flex-col gap-2">
-              <h1 className="text-2xl font-medium text-neutral-800">
-                My Tickets
-              </h1>
-              <p className="text-neutral-500 text-sm">
-                View your tickets and upcoming events
-              </p>
-            </header>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-5 md:grid-cols-3 md:gap-8">
               {tickets.map((ticket) => (
                 <Ticket {...ticket} key={ticket.id} />
               ))}

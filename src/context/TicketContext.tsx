@@ -13,8 +13,9 @@ import { useAuthContext } from './AuthContext';
 export type TicketContextType = {
   loading: boolean;
   tickets: Ticket[];
-  refetch: () => void;
   error: string | null;
+  refetch: () => void;
+  getTicketById: (ticketId: string) => Promise<Ticket | undefined>;
 };
 export const TicketsContext = createContext<TicketContextType | null>(null);
 
@@ -50,6 +51,32 @@ const TicketsProvider = ({ children }: { children: ReactNode }) => {
     setLoading(false);
   }, [user]);
 
+  const getTicketById = useCallback(async (ticketId: string) => {
+    setLoading(true);
+    const { data: ticket, error } = await supabase
+      .from('tickets')
+      .select('*, events(*)')
+      .eq('id', ticketId)
+      .single();
+
+    if (error) {
+      console.error(error);
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : 'An error occured trying to fetch that ticket'
+      );
+      setError(
+        error instanceof Error
+          ? error.message
+          : 'An error occured trying to fetch that ticket'
+      );
+    } else {
+      return ticket as Ticket;
+    }
+    setLoading(true);
+  }, []);
+
   const refetch = () => {
     fetchTickets();
   };
@@ -64,6 +91,7 @@ const TicketsProvider = ({ children }: { children: ReactNode }) => {
         tickets,
         error,
         refetch,
+        getTicketById,
       }}
     >
       {children}

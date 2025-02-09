@@ -3,21 +3,22 @@ import { EventType } from '../../types/types';
 import OptimizedImage from '../OptimizedImage';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { FaMoneyBill1Wave } from 'react-icons/fa6';
-import { BiCalendar } from 'react-icons/bi';
 import { getDateMonthTime } from '../../utils/utils';
+import { useNavigate } from 'react-router';
 
 type TicketProps = {
   events: EventType;
+  id: string;
 };
 
-const Ticket = ({ events }: TicketProps) => {
+const Ticket = ({ events: event, id }: TicketProps) => {
   const getStatus = () => {
     let className = '';
     let status = '';
-    if (events.event_date < new Date().toISOString()) {
+    if (event.event_date < new Date().toISOString()) {
       status = 'Expired';
       className = 'text-sm font-medium bg-red-200 text-red-600';
-    } else if (events.event_date > new Date().toISOString()) {
+    } else if (event.event_date > new Date().toISOString()) {
       status = 'Upcoming';
       className = 'text-sm font-medium bg-orange-200 text-orange-600';
     } else {
@@ -26,58 +27,60 @@ const Ticket = ({ events }: TicketProps) => {
     }
     return { status, className };
   };
-  return (
-    <div className="flex flex-col gap-0 rounded-3xl">
-      <OptimizedImage
-        src={events?.cover_image ?? ''}
-        alt={'Ticket for ' + events.title}
-        className="h-[180px] w-full object-cover rounded-t-3xl"
-      />
-      <div className="shadow-sm bg-white py-6 px-4 rounded-b-3xl flex flex-col gap-4  w-full">
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-medium text-neutral-800">
-            {events.title}
-          </h1>
 
-          <h3 className={`${getStatus().className} py-2 px-5 rounded-md`}>
+  const navigate = useNavigate();
+  return (
+    <div
+      onClick={() => {
+        navigate('/mytickets/' + id);
+      }}
+      className="rounded-2xl bg-white transition-all hover:shadow-sm cursor-pointer hover:cursor-pointer flex flex-col gap-4 border py-4"
+    >
+      <div className="flex items-center gap-2 px-5">
+        <OptimizedImage
+          src={event.cover_image ?? ''}
+          alt={event.title}
+          className="rounded-full w-10 h-10"
+        />
+
+        <div className="flex flex-col gap-0.5">
+          <h1 className="text-base text-neutral-800 font-medium">
+            {event.title}
+          </h1>
+          <p className="text-xs text-neutral-600 font-normal">
+            {getDateMonthTime(event.event_date).date}{' '}
+            {getDateMonthTime(event.event_date).month}{' '}
+            {getDateMonthTime(event.event_date).year}
+          </p>
+        </div>
+      </div>
+
+      <div className="w-full border border-dashed"></div>
+      <div className="flex flex-col px-5 gap-4 w-full">
+        <div className="flex flex-col gap-2">
+          <div className="text-sm text-neutral-600 flex gap-3 items-center font-normal">
+            <CiLocationOn className="text-base text-neutral-600" size={24} />
+            <p>{event.location}</p>
+          </div>
+          <div className="text-sm text-neutral-600 gap-3 flex items-center font-normal">
+            <FaMoneyBill1Wave className="text-sm text-neutral-600" size={24} />
+            <p className="flex items-center">
+              <TbCurrencyNaira className="inline" size={20} />
+              {event.ticketFee.toLocaleString()}
+            </p>
+          </div>
+          <div className="text-sm text-neutral-600 flex gap-3 items-center font-normal">
+            <CiClock1 className="text-base text-neutral-600" size={24} />
+            <p>{getDateMonthTime(event.event_date).time}</p>
+          </div>
+
+          <h3
+            className={`${
+              getStatus().className
+            } py-1 self-end  px-5 text-xs rounded-md`}
+          >
             {getStatus().status}
           </h3>
-        </div>
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-2">
-            <CiLocationOn className="text-sm text-neutral-600" size={24} />
-            <h3 className="text-base text-neutral-600">{events.location}</h3>
-          </div>
-          <div className="flex items-center gap-2">
-            <FaMoneyBill1Wave className="text-sm text-neutral-600" size={24} />
-            <h3 className="text-base flex items-center gap-1 text-neutral-600">
-              <TbCurrencyNaira className="inline" size={20} />
-              {events.ticketFee.toLocaleString()}
-            </h3>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <BiCalendar className="text-sm text-neutral-600" size={24} />
-              <h3 className="text-base flex items-center gap-1 text-neutral-600">
-                {getDateMonthTime(events.event_date).date}{' '}
-                {getDateMonthTime(events.event_date).month}{' '}
-                {getDateMonthTime(events.event_date).year}
-              </h3>
-            </div>
-            <div className="flex items-center gap-2">
-              <CiClock1 className="text-sm text-neutral-600" size={24} />
-              <h3 className="text-base text-neutral-600">
-                {getDateMonthTime(events.event_date).time}
-              </h3>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center w-full justify-end gap-4">
-          <button className="flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-blue-900 text-white shadow hover:bg-blue-900/90 px-4 py-3 border border-blue-900 active:translate-y-[1px] active:border-blue-900 active:shadow-inner">
-            Download Ticket
-          </button>
         </div>
       </div>
     </div>

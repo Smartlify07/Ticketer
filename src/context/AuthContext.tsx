@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 type AuthContextType = {
   user: UserType;
   loading: boolean;
+  error: null | string;
   handleSignUp: (values: SignUpFormValues) => void;
   handleSignIn: (values: SignInFormValues) => void;
   handleSignUpWithGoogle: () => void;
@@ -17,6 +18,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<UserType>(null);
   const [loading, setIsLoading] = useState(true);
   const [error, setError] = useState<null | string>(null);
+
   const handleSignIn = async (values: SignInFormValues) => {
     const { data: user, error } = await supabase.auth.signInWithPassword({
       email: values.email,
@@ -109,6 +111,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         user,
         loading,
+        error,
         handleSignUp,
         handleSignIn,
         handleSignUpWithGoogle,

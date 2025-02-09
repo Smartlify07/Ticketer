@@ -1,5 +1,6 @@
 import { TbCurrencyNaira } from 'react-icons/tb';
 import OptimizedImage from '../OptimizedImage';
+import { useRef } from 'react';
 
 type OrderSummaryProps = {
   cover_image: string;
@@ -7,8 +8,12 @@ type OrderSummaryProps = {
   ticketFee: number;
 };
 const OrderSummary = ({ cover_image, title, ticketFee }: OrderSummaryProps) => {
+  const total = useRef(0);
+  const fee = useRef(0);
+  fee.current = ticketFee * 0.14;
+  total.current = fee.current + ticketFee;
   return (
-    <section className="flex flex-col w-full font-poppins gap-8">
+    <section className=" flex-col hidden w-full font-poppins gap-8 md:flex">
       <header>
         <h1 className="text-sm text-neutral-500 font-medium">Order Summary</h1>
       </header>
@@ -47,7 +52,7 @@ const OrderSummary = ({ cover_image, title, ticketFee }: OrderSummaryProps) => {
 
           <h3 className="text-neutral-800 font-medium text-sm flex items-center gap-1">
             <TbCurrencyNaira size={24} />
-            200.00
+            {fee.current.toLocaleString()}
           </h3>
         </div>
       </div>
@@ -56,9 +61,9 @@ const OrderSummary = ({ cover_image, title, ticketFee }: OrderSummaryProps) => {
 
       <div className="w-full flex items-center justify-between">
         <h1 className="text-base font-medium text-neutral-800">Total</h1>
-        <h3 className="text-blue-900 font-semibold text-base flex items-center gap-1">
+        <h3 className="text-primary font-semibold text-base flex items-center gap-1">
           <TbCurrencyNaira size={24} />
-          {ticketFee.toLocaleString()}.00
+          {total.current.toLocaleString()}.00
         </h3>
       </div>
     </section>
