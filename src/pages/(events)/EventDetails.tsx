@@ -30,7 +30,7 @@ const EventDetails = () => {
   }, [id]);
 
   return (
-    <main className="text-black py-6 flex flex-col items-center font-poppins gap-0 md:py-12">
+    <main className="text-black py-6 px-4 md:px-0 flex flex-col items-center font-poppins gap-0 md:py-12">
       {!loading && event && (
         <div className="flex flex-col w-full md:flex-row md:gap-10 xl:max-w-[1440px]">
           <section className="flex flex-col  relative md:w-7/12">

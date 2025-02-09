@@ -1,4 +1,4 @@
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import TicketDetails from '../../components/(tickets)/TicketDetails';
 import { useCallback, useEffect, useState } from 'react';
 import { Ticket } from '../../types/types';
@@ -15,6 +15,7 @@ const TicketDetailsPage = () => {
     const ticket = await getTicketById(ticketId!);
     setTicket(ticket!);
   }, [ticketId, getTicketById]);
+  const navigate = useNavigate();
 
   const refetch = () => {
     fetchTicket();
@@ -24,8 +25,13 @@ const TicketDetailsPage = () => {
   }, [getTicketById, ticketId, fetchTicket]);
   return (
     <main className="flex flex-col font-poppins min-h-screen gap-5 items-center py-10 justify-center">
-      <header className="flex items-center relative justify-center self-center gap-5 border min-w-[320px] md:min-w-[450px]">
-        <button className="text-primary absolute  left-0 h-10 w-10 rounded-full bg-primary/5 flex items-center justify-center border mr-auto text-sm  gap-1">
+      <header className="flex items-center relative justify-center self-center gap-5 min-w-[320px] md:min-w-[450px]">
+        <button
+          onClick={() => {
+            navigate('/mytickets');
+          }}
+          className="text-primary absolute  left-0 h-10 w-10 rounded-full bg-primary/5 flex items-center justify-center border mr-auto text-sm  gap-1"
+        >
           <TfiAngleLeft size={16} />
         </button>
         <h1 className="text-3xl font-medium justify-self-center text-neutral-800">
