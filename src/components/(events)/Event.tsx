@@ -37,7 +37,7 @@ const Event = ({ title, cover_image, event_date, id }: EventType) => {
         </div>
         <Link
           to={pathname.replace(/\/$/, '') + `/${id}`}
-          className="rounded-md text-blue-900 text-center mt-5 text-sm  font-medium"
+          className="rounded-md text-primary text-center mt-5 text-sm  font-medium"
         >
           View Details <FaAngleRight size={20} className="inline" />
         </Link>

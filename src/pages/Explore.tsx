@@ -8,7 +8,7 @@ const Explore = () => {
   return (
     <main className="flex flex-col gap-10 py-10 justify-center">
       <header className="flex flex-col gap-2">
-        <h1 className="text-neutral-800 text-3xl w-full md:w-6/12">
+        <h1 className="text-neutral-800 text-2xl w-10/12 md:text-3xl  md:w-6/12">
           Here are events happening on campus
         </h1>
       </header>

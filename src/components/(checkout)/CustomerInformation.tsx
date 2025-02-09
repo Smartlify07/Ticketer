@@ -18,7 +18,7 @@ const CustomerInformation = ({
         <h1 className="text-neutral-800 text-base">Customer Information</h1>
       </header>
       <Formik
-        initialValues={{ name, email, matricNumber, phone: '' }}
+        initialValues={{ name, email, matricNumber: '', phone: '' }}
         onSubmit={() => {}}
       >
         <Form className="rounded-md  py-4  w-full  flex flex-col gap-4">
@@ -60,7 +60,7 @@ const CustomerInformation = ({
           </div>
 
           <div className="flex flex-col items-center justify-between gap-5 md:flex-row">
-            <div className="flex flex-col gap-1 md:w-6/12">
+            <div className="flex flex-col gap-1 w-full md:w-6/12">
               <label htmlFor="name" className="text-neutral-500 text-sm">
                 Phone Number
               </label>

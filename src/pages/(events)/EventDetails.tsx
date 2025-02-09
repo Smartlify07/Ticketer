@@ -92,7 +92,7 @@ const EventDetails = () => {
 
             <button
               onClick={goToCheckoutPage}
-              className="bg-blue-900 text-white font-medium text-sm flex  justify-center items-center gap-4 self-center w-full py-3 px-4 rounded-md mt-10 md:mt-auto"
+              className="bg-primary text-white font-medium text-sm flex  justify-center items-center gap-4 self-center w-full py-3 px-4 rounded-md mt-10 md:mt-auto"
             >
               Get Tickets <IoTicketOutline size={24} />
             </button>

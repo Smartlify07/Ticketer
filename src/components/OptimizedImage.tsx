@@ -29,7 +29,7 @@ const OptimizedImage = ({
 
       <img
         className={cn(
-          ` h-full object-cover transition-opacity duration-500 ${
+          `object-cover transition-opacity duration-500 ${
             loaded ? 'opacity-100' : 'opacity-0'
           }`,
           className

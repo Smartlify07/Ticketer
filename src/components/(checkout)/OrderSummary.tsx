@@ -56,7 +56,7 @@ const OrderSummary = ({ cover_image, title, ticketFee }: OrderSummaryProps) => {
 
       <div className="w-full flex items-center justify-between">
         <h1 className="text-base font-medium text-neutral-800">Total</h1>
-        <h3 className="text-blue-900 font-semibold text-base flex items-center gap-1">
+        <h3 className="text-primary font-semibold text-base flex items-center gap-1">
           <TbCurrencyNaira size={24} />
           {ticketFee.toLocaleString()}.00
         </h3>

@@ -12,6 +12,10 @@ export default {
         hero: 'calc(95vh - 80px)',
         'hero-sm': 'calc(95vh - 120px)',
       },
+
+      colors: {
+        primary: '#3533EA',
+      },
     },
   },
   plugins: [],

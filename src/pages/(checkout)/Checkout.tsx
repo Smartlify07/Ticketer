@@ -25,7 +25,7 @@ const Checkout = () => {
   );
 
   return (
-    <main className="text-black py-6 self-start w-full flex items-stretch font-poppins md:gap-10 md:py-12">
+    <main className="text-black py-6 self-start w-full flex flex-col-reverse gap-10 md:gap-0 md:flex-row items-stretch font-poppins md:gap-10 md:py-12">
       {!loading ? (
         <>
           <aside className="md:w-7/12 flex flex-col pb-10 gap-6">
@@ -46,7 +46,7 @@ const Checkout = () => {
                   onClose: () => {},
                 });
               }}
-              className="rounded-md bg-blue-900 text-white flex items-center gap-2 py-4 px-4 text-center justify-center text-sm font-medium mt-auto justify-self-end"
+              className="rounded-md bg-primary text-white flex items-center gap-2 py-4 px-4 text-center justify-center text-sm font-medium mt-auto justify-self-end"
             >
               Make Payment <FaAngleRight size={20} />
             </button>
@@ -58,10 +58,10 @@ const Checkout = () => {
                 Total amount
               </h3>
 
-              <h1 className="text-4xl font-semibold text-center flex items-center self-center text-blue-900">
+              <h1 className="text-4xl font-semibold text-center flex items-center self-center text-primary">
                 <TbCurrencyNaira size={32} className="inline" />{' '}
                 {event?.ticketFee.toLocaleString()}{' '}
-                <span className="text-opacity-50 text-blue-900">.00</span>
+                <span className="text-opacity-50 text-primary">.00</span>
               </h1>
 
               <h3 className="text-neutral-500 text-xs  self-center flex items-center  gap-1 tracking-tight">
