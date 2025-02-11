@@ -8,7 +8,6 @@ const MobileNavbar = ({ showNav }: { showNav: boolean }) => {
         opacity: 0,
         top: -80,
         right: 0,
-        display: 'none',
       }}
       animate={{
         opacity: showNav ? 1 : 0,

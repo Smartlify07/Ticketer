@@ -64,7 +64,7 @@ const CheckoutProvider = ({ children }: { children: ReactNode }) => {
       setEvent(event!);
       setLoading(false);
     })();
-  }, [id]);
+  }, [id, fetchEventById]);
 
   return (
     <CheckoutContext.Provider

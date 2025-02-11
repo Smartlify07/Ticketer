@@ -35,9 +35,9 @@ export type Profile = {
   user_id: string;
   name: string;
   matricNumber: string;
-  profile_completed: boolean;
+  phone: string;
   department: string;
-  id: string;
+  id?: string;
   email: string;
 };
 

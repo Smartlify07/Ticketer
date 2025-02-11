@@ -82,18 +82,21 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (user) {
         setUser(user);
-        const { data: student, error: studentError } = await supabase
-          .from('students')
+
+        const { data: profile } = await supabase
+          .from('profiles')
           .select('id')
           .eq('user_id', user.id)
           .single();
 
-        if (!student && !studentError) {
-          await supabase.from('students').upsert({
+        if (!profile) {
+          await supabase.from('profiles').insert({
             user_id: user.id,
             email: user.email,
             name: user.user_metadata?.full_name || null,
             matricNumber: null,
+            phone: null,
+            avatar: null,
           });
         }
       }

@@ -48,7 +48,7 @@ const TicketDetails = ({ event, id }: TicketDetailsProps) => {
       })
       .catch((error) => {
         console.error(error);
-        toast.error('Failed to download image');
+        toast.error('', {});
         setLoading(false);
       });
   }, [event.title]);
