@@ -7,7 +7,7 @@ const TicketsPage = () => {
   const { tickets, loading } = useTickets();
   const navigate = useNavigate();
   return (
-    <main className="flex flex-col  justify-center py-10">
+    <main className="flex flex-col  justify-center px-4 md:px-0 py-10">
       <header className="flex flex-col gap-2">
         <h1 className="text-2xl font-medium text-neutral-800">My Tickets</h1>
         <p className="text-neutral-500 text-sm">
