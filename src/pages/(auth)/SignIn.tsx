@@ -6,7 +6,7 @@ import { useAuthContext } from '../../context/AuthContext';
 import { FcGoogle } from 'react-icons/fc';
 const SignIn = () => {
   const inputClassName =
-    'border rounded-md py-2 text-sm relative w-full placeholder:text-sm px-4 focus:outline-none focus:shadow-sm focus:border-1.5 focus:border-blue-900';
+    'border rounded-md py-2 text-sm relative w-full placeholder:text-sm px-4 focus:outline-none focus:shadow-sm focus:border-1.5 focus:border-primary';
 
   const { handleSignIn, handleSignUpWithGoogle } = useAuthContext();
 
@@ -101,7 +101,7 @@ const SignIn = () => {
 
           <button
             type="submit"
-            className="bg-blue-900 text-white text-sm font-medium mt-6 py-3 border-blue-900 rounded-md shadow-sm"
+            className="bg-primary text-white text-sm font-medium mt-6 py-3 border-primary rounded-md shadow-sm"
           >
             Sign in
           </button>
