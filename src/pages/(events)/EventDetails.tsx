@@ -39,9 +39,9 @@ const EventDetails = () => {
                 <OptimizedImage
                   src={event?.cover_image}
                   alt={event?.title}
-                  className="object-cover z-20 w-full rounded-2xl"
+                  className="object-cover z-10 w-full rounded-2xl"
                 />
-                <div className="absolute w-full z-40 top-0 left-0 h-full bg-black bg-opacity-50  rounded-2xl"></div>
+                <div className="absolute w-full z-10 top-0 left-0 h-full bg-black bg-opacity-50  rounded-2xl"></div>
               </div>
             ) : (
               <div className="w-full  h-full  md:h-[400px] bg-neutral-50 animate-pulse  rounded-2xl"></div>
