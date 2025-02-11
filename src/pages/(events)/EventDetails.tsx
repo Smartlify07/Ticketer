@@ -11,15 +11,17 @@ import EventDetailsSkeleton from '../../components/(skeletons)/EventDetailsSkele
 import OptimizedImage from '../../components/OptimizedImage';
 import { CiLocationOn } from 'react-icons/ci';
 import { TbCurrencyNaira } from 'react-icons/tb';
+import { useAuthContext } from '../../context/AuthContext';
 
 const EventDetails = () => {
   const id = useParams().id;
   const pathname = useLocation().pathname;
   const navigate = useNavigate();
   const { fetchEventById, error, refetch, loading } = useEvents();
-
+  const { user } = useAuthContext();
   const goToCheckoutPage = () => {
-    navigate(pathname.replace(/\/$/, '') + '/checkout');
+    if (user) navigate(pathname.replace(/\/$/, '') + '/checkout');
+    else navigate('/signin');
   };
   const [event, setEvent] = useState<EventType | null>(null);
   useEffect(() => {
