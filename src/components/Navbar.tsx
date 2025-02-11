@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { UserType } from '../types/types';
 import { useState } from 'react';
 import { AnimatePresence } from 'motion/react';
@@ -34,7 +34,9 @@ const Navbar = ({ user, logout }: NavbarProps) => {
             />
           </g>
         </svg>
-        <h1 className="text-primary text-2xl font-medium">Eventify</h1>
+        <Link to={'/'} className="text-primary text-2xl font-medium">
+          Eventify
+        </Link>
       </header>
 
       {!user && (
