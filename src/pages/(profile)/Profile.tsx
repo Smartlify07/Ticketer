@@ -1,7 +1,6 @@
 import PersonalInformation from '../../components/(profile)/PersonalInformation';
 import ProfileTop from '../../components/(profile)/ProfileTop';
 import ProfileSkeleton from '../../components/(skeletons)/ProfileSkeleton';
-import ToastMessage from '../../components/ToastError';
 import { useProfile } from '../../hooks/useProfile';
 
 const Profile = () => {
@@ -33,15 +32,13 @@ const Profile = () => {
           </>
         )}
 
-        {loading && !profile && <ProfileSkeleton />}
+        {loading && !profile && !error && <ProfileSkeleton />}
         {error && (
           <section className="min-h-[400px] flex items-center justify-center">
             {error}
           </section>
         )}
       </div>
-
-      <ToastMessage message="Hello" type="success" />
     </main>
   );
 };
