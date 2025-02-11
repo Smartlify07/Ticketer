@@ -21,7 +21,7 @@ const SignIn = () => {
   });
 
   return (
-    <aside className="flex flex-col gap-6 self-center min-w-[400px] md:max-w-[400px]">
+    <aside className="flex flex-col gap-6 self-center px-10 md:px-0 min-w-[400px] md:max-w-[400px]">
       <header className="flex flex-col gap-2">
         <h1 className="text-black font-medium text-2xl">Welcome Back!</h1>
         <p className="text-neutral-400 text-sm">
