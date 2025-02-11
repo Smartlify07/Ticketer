@@ -16,7 +16,7 @@ const Profile = () => {
             View and edit your profile details
           </p>
         </header>
-        {!loading && profile && !error && (
+        {!loading && profile && (
           <>
             <ProfileTop
               name={profile?.name ?? ''}
@@ -32,7 +32,7 @@ const Profile = () => {
           </>
         )}
 
-        {loading && !profile && !error && <ProfileSkeleton />}
+        {loading && <ProfileSkeleton />}
         {error && (
           <section className="min-h-[400px] flex items-center justify-center">
             {error}

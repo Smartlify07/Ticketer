@@ -85,19 +85,26 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
         const { data: profile } = await supabase
           .from('profiles')
-          .select('id')
+          .select('*')
           .eq('user_id', user.id)
           .single();
 
         if (!profile) {
-          await supabase.from('profiles').insert({
-            user_id: user.id,
-            email: user.email,
-            name: user.user_metadata?.full_name || null,
-            matricNumber: null,
-            phone: null,
-            avatar: null,
-          });
+          const { error: insertError } = await supabase
+            .from('profiles')
+            .insert({
+              user_id: user.id,
+              email: user.email,
+              name: user.user_metadata?.full_name || null,
+              matricNumber: null,
+              phone: null,
+              avatar: null,
+            });
+
+          if (insertError) {
+            console.error('Insert Error:', insertError);
+            toast.error(insertError.message);
+          }
         }
       }
       if (fetchError) {

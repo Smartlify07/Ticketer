@@ -68,7 +68,7 @@ const ProfileProvider = ({ children }: { children: ReactNode }) => {
     toast.success('Profile updated successfully');
     if (error) {
       toast.error(error.message || 'Failed to update profile');
-      console.error('Profile update failed', error);
+      console.error('Profile update failed');
     }
 
     setLoading(false);
