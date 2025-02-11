@@ -1,6 +1,5 @@
 import { Navigate, Outlet, useNavigate } from 'react-router';
 import { useAuthContext } from '../context/AuthContext';
-import { BiUser } from 'react-icons/bi';
 import { useState } from 'react';
 import ProfileDropdown from '../components/(profile)/ProfileDropdown';
 import { AnimatePresence } from 'motion/react';
@@ -64,7 +63,7 @@ const RootLayout = () => {
                   onClick={toggleDropdown}
                   className="rounded-full w-10 text-lg font-medium h-10 flex items-center justify-center bg-primary/5 text-primary"
                 >
-                  <BiUser />
+                  {user?.user_metadata.name.charAt(0).toUpperCase()}
                 </button>
                 <AnimatePresence mode="popLayout">
                   {showProfileDropdown && (
