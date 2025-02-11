@@ -1,6 +1,7 @@
 import PersonalInformation from '../../components/(profile)/PersonalInformation';
 import ProfileTop from '../../components/(profile)/ProfileTop';
 import ProfileSkeleton from '../../components/(skeletons)/ProfileSkeleton';
+import ToastMessage from '../../components/ToastError';
 import { useProfile } from '../../hooks/useProfile';
 
 const Profile = () => {
@@ -39,6 +40,8 @@ const Profile = () => {
           </section>
         )}
       </div>
+
+      <ToastMessage message="Hello" type="success" />
     </main>
   );
 };
