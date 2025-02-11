@@ -5,8 +5,10 @@ import OptimizedImage from '../OptimizedImage';
 import QRCode from 'react-qr-code';
 import { BiUpload } from 'react-icons/bi';
 import { TbCurrencyNaira } from 'react-icons/tb';
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { toPng } from 'html-to-image';
+import { toast } from 'react-toastify';
+import LoadingSpinner from '../LoadingSpinner';
 
 type TicketDetailsProps = {
   event: EventType;
@@ -31,17 +33,23 @@ const TicketDetails = ({ event, id }: TicketDetailsProps) => {
     return { status, className };
   };
 
+  const [loading, setLoading] = useState(false);
+
   const ticketRef = useRef<HTMLDivElement>(null);
   const handleDownloadImage = useCallback(() => {
     toPng(ticketRef.current!, { cacheBust: true })
       .then((dataUrl) => {
+        setLoading(true);
         const link = document.createElement('a');
         link.download = `${event.title}-ticket.png`;
         link.href = dataUrl;
         link.click();
+        setLoading(false);
       })
       .catch((error) => {
         console.error(error);
+        toast.error('Failed to download image');
+        setLoading(false);
       });
   }, [event.title]);
 
@@ -128,7 +136,9 @@ const TicketDetails = ({ event, id }: TicketDetailsProps) => {
           onClick={handleDownloadImage}
           className="text-white flex justify-center items-center gap-2 bg-primary w-full font-medium text-sm rounded-md py-3 px-5 hover:bg-primary/95"
         >
-          <FiDownload size={20} /> Download
+          {loading && <LoadingSpinner innerFill="#fff" outerFill="#3533ea" />}
+          {!loading && <FiDownload size={20} />}
+          Download
         </button>
         <button className="text-neutral-600 flex justify-center items-center gap-2 border border-neutral-400 w-full font-medium text-sm rounded-md py-3 px-5">
           <BiUpload size={20} /> Share
