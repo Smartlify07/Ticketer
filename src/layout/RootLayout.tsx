@@ -1,15 +1,21 @@
 import { Navigate, Outlet, useNavigate } from 'react-router';
 import { useAuthContext } from '../context/AuthContext';
 import { BiUser } from 'react-icons/bi';
+import { useState } from 'react';
+import ProfileDropdown from '../components/(profile)/ProfileDropdown';
+import { AnimatePresence } from 'motion/react';
 
 const RootLayout = () => {
-  const { user, error } = useAuthContext();
+  const { user, error, logout } = useAuthContext();
   const navigate = useNavigate();
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
+  const toggleDropdown = () => setShowProfileDropdown((prev) => !prev);
+  const closeDropdown = () => setShowProfileDropdown(false);
   return (
     <>
       {error && !user && <Navigate to="/signin" />}
-      <main className="flex flex-col  items-center font-poppins min-h-screen bg-[] bg-opacity-5 md:px-10">
+      <main className="flex flex-col  items-center font-poppins min-h-screen bg-opacity-5 md:px-10">
         <div className="flex flex-col w-full max-w-[1440px]">
           <nav className="rounded-2xl px-4 flex items-center justify-between py-6">
             <header className="flex items-center gap-2">
@@ -53,10 +59,23 @@ const RootLayout = () => {
             )}
 
             {user && (
-              <div className="flex items-center gap-4">
-                <button className="rounded-full w-10 text-lg font-medium h-10 flex items-center justify-center bg-primary/5 text-primary">
+              <div className="flex items-center relative gap-4">
+                <button
+                  onClick={toggleDropdown}
+                  className="rounded-full w-10 text-lg font-medium h-10 flex items-center justify-center bg-primary/5 text-primary"
+                >
                   <BiUser />
                 </button>
+                <AnimatePresence mode="popLayout">
+                  {showProfileDropdown && (
+                    <ProfileDropdown
+                      closeDropdown={closeDropdown}
+                      logout={logout}
+                      userName={user?.user_metadata.name}
+                      email={user?.email ?? ''}
+                    />
+                  )}
+                </AnimatePresence>
               </div>
             )}
           </nav>
