@@ -8,6 +8,6 @@ export const useProfileCheck = () => {
   const { profile, loading } = useProfile();
   const pathname = useLocation().pathname;
   useEffect(() => {
-    if (!profile && !loading) navigate('profile');
+    if (!profile && !loading) navigate('/profile');
   }, [profile, loading, navigate, pathname]);
 };
