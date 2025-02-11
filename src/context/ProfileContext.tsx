@@ -39,7 +39,6 @@ const ProfileProvider = ({ children }: { children: ReactNode }) => {
     phone: string,
     department: string
   ) => {
-    setLoading(true);
     const { data, error } = await supabase
       .from('profiles')
       .update({
@@ -70,8 +69,6 @@ const ProfileProvider = ({ children }: { children: ReactNode }) => {
       toast.error(error.message || 'Failed to update profile');
       console.error('Profile update failed');
     }
-
-    setLoading(false);
   };
 
   const fetchProfile = useCallback(async () => {
