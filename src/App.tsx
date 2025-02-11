@@ -33,7 +33,16 @@ function App() {
         </Route>
 
         <Route element={<RootLayout />}>
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfileProvider>
+                  <Profile />
+                </ProfileProvider>
+              </ProtectedRoute>
+            }
+          />
           <Route path="/" element={<Home />} />
           <Route
             path="/explore"

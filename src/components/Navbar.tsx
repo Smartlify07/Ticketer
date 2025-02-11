@@ -17,7 +17,7 @@ const Navbar = ({ user, logout }: NavbarProps) => {
   const closeDropdown = () => setShowProfileDropdown(false);
   const [showNav, setShowNav] = useState(false);
   return (
-    <nav className="rounded-2xl relative px-4 flex items-center justify-between py-6">
+    <nav className="rounded-2xl relative px-4 md:px-0  flex items-center justify-between py-6">
       <header className="flex items-center gap-2">
         <svg
           fill="none"
