@@ -5,6 +5,9 @@ import OptimizedImage from '../OptimizedImage';
 import QRCode from 'react-qr-code';
 import { BiUpload } from 'react-icons/bi';
 import { TbCurrencyNaira } from 'react-icons/tb';
+import { useCallback, useRef } from 'react';
+import { toPng } from 'html-to-image';
+
 type TicketDetailsProps = {
   event: EventType;
   id: string;
@@ -27,9 +30,27 @@ const TicketDetails = ({ event, id }: TicketDetailsProps) => {
     }
     return { status, className };
   };
+
+  const ticketRef = useRef<HTMLDivElement>(null);
+  const handleDownloadImage = useCallback(() => {
+    toPng(ticketRef.current!, { cacheBust: true })
+      .then((dataUrl) => {
+        const link = document.createElement('a');
+        link.download = `${event.title}-ticket.png`;
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [event.title]);
+
   return (
-    <div className="flex flex-col gap-8 w-[320px] md:w-[450px]">
-      <div className="rounded-3xl border flex flex-col gap-6 py-7 w-full relative">
+    <div className="flex flex-col  gap-8 w-[320px] md:w-[450px]">
+      <div
+        ref={ticketRef}
+        className="rounded-3xl bg-white border flex flex-col gap-6 py-7 w-full relative"
+      >
         <div className="flex items-center justify-between px-6 w-full">
           <div className="flex flex-col gap-1">
             <h3 className="text-neutral-400 text-xs">Ticket Number</h3>
@@ -103,7 +124,10 @@ const TicketDetails = ({ event, id }: TicketDetailsProps) => {
       </div>
 
       <div className="flex items-center gap-4">
-        <button className="text-white flex justify-center items-center gap-2 bg-primary w-full font-medium text-sm rounded-md py-3 px-5">
+        <button
+          onClick={handleDownloadImage}
+          className="text-white flex justify-center items-center gap-2 bg-primary w-full font-medium text-sm rounded-md py-3 px-5 hover:bg-primary/95"
+        >
           <FiDownload size={20} /> Download
         </button>
         <button className="text-neutral-600 flex justify-center items-center gap-2 border border-neutral-400 w-full font-medium text-sm rounded-md py-3 px-5">
