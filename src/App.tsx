@@ -8,14 +8,14 @@ import AuthLayout from './layout/(auth)/AuthLayout';
 import AuthProvider from './context/AuthContext';
 import { Slide, ToastContainer } from 'react-toastify';
 import RootLayout from './layout/RootLayout';
-import CheckoutProvider from './context/CheckoutContext';
 import ProfileProvider from './context/ProfileContext';
 import ProtectedRoute from './Routes/ProtectedRoute';
-import EventsProvider from './context/EventsContext';
 import TicketsProvider from './context/TicketContext';
 import { lazy, Suspense } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
+  const queryClient = new QueryClient();
   const Home = lazy(() => import('./pages/Home'));
   const SignIn = lazy(() => import('./pages/(auth)/SignIn'));
   const SignUp = lazy(() => import('./pages/(auth)/SignUp'));
@@ -53,9 +53,7 @@ function App() {
             path="/explore/:id/checkout"
             element={
               <ProtectedRoute>
-                <CheckoutProvider>
-                  <Checkout />
-                </CheckoutProvider>
+                <Checkout />
               </ProtectedRoute>
             }
           />
@@ -82,9 +80,9 @@ function App() {
     )
   );
   return (
-    <AuthProvider>
-      <ProfileProvider>
-        <EventsProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <ProfileProvider>
           <TicketsProvider>
             <ToastContainer
               position="bottom-right"
@@ -95,9 +93,9 @@ function App() {
               <RouterProvider router={router}></RouterProvider>
             </Suspense>
           </TicketsProvider>
-        </EventsProvider>
-      </ProfileProvider>
-    </AuthProvider>
+        </ProfileProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 

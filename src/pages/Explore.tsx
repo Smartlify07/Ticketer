@@ -1,10 +1,9 @@
-import { BiRefresh } from 'react-icons/bi';
 import Event from '../components/(events)/Event';
 import { useEvents } from '../hooks/useEvents';
 import EventSkeleton from '../components/(skeletons)/EventSkeleton';
 
 const Explore = () => {
-  const { events, loading, error, refetch } = useEvents();
+  const { events, loading, error } = useEvents();
   return (
     <main className="flex flex-col gap-10 py-10 px-4 md:px-0 justify-center">
       <header className="flex flex-col gap-2">
@@ -48,15 +47,15 @@ const Explore = () => {
       {error && (
         <section className="flex flex-col gap-4">
           <h1 className="text-3xl md:text-4xl font-medium font-montserrat">
-            {error}
+            {error.message}
           </h1>
 
-          <button
+          {/* <button
             onClick={refetch}
             className="border rounded-md self-center py-2 px-3 text-neutral-900 flex items-center gap-2 font-medium "
           >
             Try again <BiRefresh />
-          </button>
+          </button> */}
         </section>
       )}
     </main>

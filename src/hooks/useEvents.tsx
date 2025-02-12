@@ -1,10 +1,16 @@
-import { useContext } from 'react';
-import { EventsContext, EventsContextType } from '../context/EventsContext';
+import { useQuery } from '@tanstack/react-query';
+import { fetchEvents } from '../api/events';
 
 export const useEvents = () => {
-  const values = useContext(EventsContext) as EventsContextType;
-  if (!values) {
-    throw new Error('useEvents must be used within an EventsProvider');
-  }
-  return values;
+  const {
+    data: events,
+    isPending: loading,
+    error,
+  } = useQuery({
+    queryKey: ['events'],
+    queryFn: fetchEvents,
+    staleTime: 12 * 100,
+  });
+
+  return { events, loading, error };
 };

@@ -1,35 +1,35 @@
 import { useLocation, useNavigate, useParams } from 'react-router';
-// import { CiLocationOn } from 'react-icons/ci';
 import { BsClock } from 'react-icons/bs';
 import { getDateMonthTime } from '../../utils/utils';
 import { IoTicketOutline } from 'react-icons/io5';
-import { BiCalendar, BiRefresh } from 'react-icons/bi';
-import { useEvents } from '../../hooks/useEvents';
-import { useEffect, useState } from 'react';
-import { EventType } from '../../types/types';
+import { BiCalendar } from 'react-icons/bi';
 import EventDetailsSkeleton from '../../components/(skeletons)/EventDetailsSkeleton';
 import OptimizedImage from '../../components/OptimizedImage';
 import { CiLocationOn } from 'react-icons/ci';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { useAuthContext } from '../../context/AuthContext';
+import { useQuery } from '@tanstack/react-query';
+import { fetchEventById } from '../../api/events';
 
 const EventDetails = () => {
   const id = useParams().id;
   const pathname = useLocation().pathname;
   const navigate = useNavigate();
-  const { fetchEventById, error, refetch, loading } = useEvents();
   const { user } = useAuthContext();
   const goToCheckoutPage = () => {
     if (user) navigate(pathname.replace(/\/$/, '') + '/checkout');
     else navigate('/signin');
   };
-  const [event, setEvent] = useState<EventType | null>(null);
-  useEffect(() => {
-    (async () => {
-      const event = await fetchEventById(id!);
-      setEvent(event!);
-    })();
-  }, [id]);
+
+  const {
+    data: event,
+    error,
+    isPending: loading,
+  } = useQuery({
+    queryKey: ['events', id],
+    queryFn: () => fetchEventById(id!),
+    staleTime: 5 * 1000,
+  });
 
   return (
     <main className="text-black py-6 px-4 md:px-0 flex flex-col items-center font-poppins gap-0 md:py-12">
@@ -106,15 +106,15 @@ const EventDetails = () => {
       {error && (
         <section className="flex flex-col gap-4">
           <h1 className="text-3xl md:text-4xl font-medium font-montserrat">
-            {error}
+            {error.message}
           </h1>
 
-          <button
+          {/* <button
             onClick={refetch}
             className="border rounded-md self-center py-2 px-3 text-neutral-900 flex items-center gap-2 font-medium "
           >
             Try again <BiRefresh />
-          </button>
+          </button> */}
         </section>
       )}
     </main>

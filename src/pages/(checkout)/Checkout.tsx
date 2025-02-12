@@ -9,10 +9,11 @@ import CheckoutSkeleton from '../../components/(skeletons)/CheckoutSkeleton';
 import { flutterwaveConfig } from '../../flutterwave.config';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import { LiaAngleLeftSolid } from 'react-icons/lia';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 const Checkout = () => {
-  const { event, loading, handleUpdatePayment } = useCheckout();
+  const { id } = useParams();
+  const { event, loading, handleUpdatePayment } = useCheckout(id!);
   const { profile } = useProfile();
 
   const handleInitiatePayment = useFlutterwave(

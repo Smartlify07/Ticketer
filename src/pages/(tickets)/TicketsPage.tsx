@@ -6,6 +6,7 @@ import TicketsPageSkeleton from '../../components/(skeletons)/TicketsPageSkeleto
 const TicketsPage = () => {
   const { tickets, loading } = useTickets();
   const navigate = useNavigate();
+  console.log(tickets, loading);
   return (
     <main className="flex flex-col  justify-center px-4 md:px-0 py-10">
       <header className="flex flex-col gap-2">
@@ -15,7 +16,7 @@ const TicketsPage = () => {
         </p>
       </header>
       <div className="w-full items-center justify-center max-w-[1440px] flex flex-col">
-        {!loading && tickets.length === 0 && (
+        {!loading && tickets!.length === 0 && (
           <div className="flex flex-col justify-center min-h-[500px] gap-6">
             <div className="flex gap-2 items-center flex-col">
               <h1 className="self-center justify-self-center md:text-2xl  font-medium text-neutral-900">
@@ -29,7 +30,7 @@ const TicketsPage = () => {
             <div className="flex items-center justify-center gap-4">
               <button
                 onClick={() => navigate('/explore')}
-                className="bg-blue-900 text-sm text-white font-medium py-3 px-8 rounded-md hover:bg-blue-800 transition-all"
+                className="bg-primary text-sm text-white font-medium py-3 px-8 rounded-md hover:bg-blue-800 transition-all"
               >
                 View Events
               </button>
@@ -38,10 +39,10 @@ const TicketsPage = () => {
         )}
         {loading && <TicketsPageSkeleton />}
 
-        {tickets.length > 0 && (
+        {tickets && tickets.length > 0 && (
           <section className="flex flex-col self-start w-full py-10 gap-8">
             <div className="grid gap-5 md:grid-cols-3 md:gap-8">
-              {tickets.map((ticket) => (
+              {tickets?.map((ticket) => (
                 <Ticket {...ticket} key={ticket.id} />
               ))}
             </div>
