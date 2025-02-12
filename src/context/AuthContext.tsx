@@ -103,7 +103,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
           if (insertError) {
             console.error('Insert Error:', insertError);
-            toast.error(insertError.message);
           }
         }
       }
