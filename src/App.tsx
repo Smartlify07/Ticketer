@@ -5,25 +5,29 @@ import {
   RouterProvider,
 } from 'react-router';
 import AuthLayout from './layout/(auth)/AuthLayout';
-import SignUp from './pages/(auth)/SignUp';
-import SignIn from './pages/(auth)/SignIn';
 import AuthProvider from './context/AuthContext';
 import { Slide, ToastContainer } from 'react-toastify';
 import RootLayout from './layout/RootLayout';
-import Home from './pages/Home';
-import Explore from './pages/Explore';
-import EventDetails from './pages/(events)/EventDetails';
-import Checkout from './pages/(checkout)/Checkout';
 import CheckoutProvider from './context/CheckoutContext';
-import Profile from './pages/(profile)/Profile';
 import ProfileProvider from './context/ProfileContext';
 import ProtectedRoute from './Routes/ProtectedRoute';
 import EventsProvider from './context/EventsContext';
-import TicketsPage from './pages/(tickets)/TicketsPage';
 import TicketsProvider from './context/TicketContext';
-import TicketDetailsPage from './pages/(tickets)/TicketDetailsPage';
+import { lazy, Suspense } from 'react';
 
 function App() {
+  const Home = lazy(() => import('./pages/Home'));
+  const SignIn = lazy(() => import('./pages/(auth)/SignIn'));
+  const SignUp = lazy(() => import('./pages/(auth)/SignUp'));
+  const Profile = lazy(() => import('./pages/(profile)/Profile'));
+  const Explore = lazy(() => import('./pages/Explore'));
+  const EventDetails = lazy(() => import('./pages/(events)/EventDetails'));
+  const Checkout = lazy(() => import('./pages/(checkout)/Checkout'));
+  const TicketsPage = lazy(() => import('./pages/(tickets)/TicketsPage'));
+  const TicketDetailsPage = lazy(
+    () => import('./pages/(tickets)/TicketDetailsPage')
+  );
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
@@ -33,42 +37,25 @@ function App() {
         </Route>
 
         <Route element={<RootLayout />}>
+          <Route path="/" element={<Home />} />
+
           <Route
             path="/profile"
             element={
               <ProtectedRoute>
-                <ProfileProvider>
-                  <Profile />
-                </ProfileProvider>
+                <Profile />
               </ProtectedRoute>
             }
           />
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/explore"
-            element={
-              <EventsProvider>
-                <Explore />
-              </EventsProvider>
-            }
-          />
-          <Route
-            path="/explore/:id"
-            element={
-              <EventsProvider>
-                <EventDetails />
-              </EventsProvider>
-            }
-          />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/explore/:id" element={<EventDetails />} />
           <Route
             path="/explore/:id/checkout"
             element={
               <ProtectedRoute>
-                <EventsProvider>
-                  <CheckoutProvider>
-                    <Checkout />
-                  </CheckoutProvider>
-                </EventsProvider>
+                <CheckoutProvider>
+                  <Checkout />
+                </CheckoutProvider>
               </ProtectedRoute>
             }
           />
@@ -77,36 +64,38 @@ function App() {
             path="/mytickets"
             element={
               <ProtectedRoute>
-                <TicketsProvider>
-                  <TicketsPage />
-                </TicketsProvider>
+                <TicketsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/mytickets/:ticketId"
+            element={
+              <ProtectedRoute>
+                <TicketDetailsPage />
               </ProtectedRoute>
             }
           />
         </Route>
-
-        <Route
-          path="/mytickets/:ticketId"
-          element={
-            <ProtectedRoute>
-              <TicketsProvider>
-                <TicketDetailsPage />
-              </TicketsProvider>
-            </ProtectedRoute>
-          }
-        />
       </>
     )
   );
   return (
     <AuthProvider>
       <ProfileProvider>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={2000}
-          transition={Slide}
-        />
-        <RouterProvider router={router}></RouterProvider>
+        <EventsProvider>
+          <TicketsProvider>
+            <ToastContainer
+              position="bottom-right"
+              autoClose={2000}
+              transition={Slide}
+            />
+            <Suspense>
+              <RouterProvider router={router}></RouterProvider>
+            </Suspense>
+          </TicketsProvider>
+        </EventsProvider>
       </ProfileProvider>
     </AuthProvider>
   );
