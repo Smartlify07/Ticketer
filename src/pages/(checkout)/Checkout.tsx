@@ -20,7 +20,7 @@ const Checkout = () => {
       profile?.email ?? '',
       '',
       profile?.name ?? '',
-      event?.ticketFee ?? 0,
+      event?.ticketFee ? event.ticketFee * 0.14 + event.ticketFee : 0,
       event?.title ?? ''
     )
   );
